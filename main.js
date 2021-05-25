@@ -153,7 +153,7 @@ submitButton.addEventListener('click', updateCoffees);
 //
 //         }
 //     }
-    console.log('test');
-    coffees.pop();
-    tbody.innerHTML = renderCoffees(coffees);
-}
+//     console.log('test');
+//     coffees.pop();
+//     tbody.innerHTML = renderCoffees(coffees);
+// }
