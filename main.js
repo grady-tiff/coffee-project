@@ -22,7 +22,7 @@ function renderCoffee(coffee) {
     var html = document.createElement('li');
     // html.setAttribute('class', 'coffee');
     var child = document.createElement('div');
-    child.innerHTML = `${coffee.name} ${coffee.roast} `;
+    child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#">-</a>`;
     child.setAttribute('id', coffee.id);
     html.appendChild(child);
     return html.outerHTML;
@@ -74,6 +74,36 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
+
+// function submitCoffee(e){
+//     e.preventDefault();
+// document.getElementById('coffee-add')
+//     .addEventListener('click', addCoffee);
+// }
+
+// function to addCoffee
+function addCoffee(e){
+
+    e.preventDefault(); // make a copy of earlier functionality (wont refresh on submit);
+
+    // create new variables getting values of what to add;
+    var id = (coffees.length + 1);
+    var roast = document.getElementById('roast-creation').value;
+    var coffeeName = document.getElementById('coffee-add').value;
+
+    // Create new object;
+    var newObject = {
+        id: id,
+        name: coffeeName,
+        roast: roast
+    };
+
+    coffees.push(newObject);
+    console.log(coffees);
+    tbody.innerHTML = renderCoffees(coffees);
+}
+
+
 function mySearch() {
     let input, filter, ul, li, div, txtValue;
      input = document.getElementById('coffee-search');
@@ -95,9 +125,35 @@ function mySearch() {
 
 var tbody = document.getElementById('coffees');
 var submitButton = document.querySelector('#submit');
+var submitCoffee = document.getElementById('add');
 var roastSelection = document.querySelector('#roast-selection');
 
 tbody.innerHTML = renderCoffees(coffees);
 
+submitCoffee.addEventListener('click', addCoffee);
+
 submitButton.addEventListener('click', updateCoffees);
 
+
+
+// removeButton();
+
+// function removeButton(){
+//     for(let i = 0; i < coffees.length; i++){
+//         document.getElementById(`remove${i + 1}`).addEventListener('click', removeCoffee);
+//     }
+//
+// }
+
+// function removeCoffee(){
+//     let a = document.getElementsByTagName('a');
+//     console.log(a.length);
+//     for(let i = 0; i< coffees.length; i++) {
+//         if (coffees.id === a[i + 1]) {
+//
+//         }
+//     }
+    console.log('test');
+    coffees.pop();
+    tbody.innerHTML = renderCoffees(coffees);
+}
