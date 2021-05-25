@@ -22,7 +22,7 @@ function renderCoffee(coffee) {
     var html = document.createElement('li');
     // html.setAttribute('class', 'coffee');
     var child = document.createElement('div');
-    child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#">-</a>`;
+    child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">-</a>`;
     child.setAttribute('id', coffee.id);
     html.appendChild(child);
     return html.outerHTML;
@@ -75,6 +75,13 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
+// var storedCoffees = localStorage.setItem('coffees', JSON.stringify(coffees)); // remove from global scope
+// JSON.parse(storedCoffees);
+// console.log(JSON.parse(localStorage.getItem('coffees')));
+// coffees = JSON.parse(localStorage.getItem('coffees'));
+//
+
+
 // function submitCoffee(e){
 //     e.preventDefault();
 // document.getElementById('coffee-add')
@@ -99,6 +106,7 @@ function addCoffee(e){
     };
 
     coffees.push(newObject);
+    localStorage.setItem('coffees', JSON.stringify(coffees));
     console.log(coffees);
     tbody.innerHTML = renderCoffees(coffees);
 }
@@ -140,20 +148,19 @@ submitButton.addEventListener('click', updateCoffees);
 
 // function removeButton(){
 //     for(let i = 0; i < coffees.length; i++){
-//         document.getElementById(`remove${i + 1}`).addEventListener('click', removeCoffee);
+//         document.getElementById(`remove${i + 1}`).addEventListener('click', function(){removeCoffee(i)});
 //     }
 //
-// }
+// } fixed issues
 
-// function removeCoffee(){
-//     let a = document.getElementsByTagName('a');
-//     console.log(a.length);
-//     for(let i = 0; i< coffees.length; i++) {
-//         if (coffees.id === a[i + 1]) {
-//
-//         }
-//     }
-//     console.log('test');
-//     coffees.pop();
-//     tbody.innerHTML = renderCoffees(coffees);
-// }
+function removeCoffee(index) {
+
+
+
+    console.log('test');
+    coffees.splice(index, 1);
+    localStorage.setItem('coffees', JSON.stringify(coffees));
+    console.log(index);
+    tbody.innerHTML = renderCoffees(coffees);
+//     removeButton();
+}
