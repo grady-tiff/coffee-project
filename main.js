@@ -17,21 +17,26 @@
 //     return html;
 // }
 
-
+// added createElement instead html +=
 function renderCoffee(coffee) {
-    var html = document.createElement('div');
-    html.setAttribute('class', 'coffee');
+    var html = document.createElement('li');
+    // html.setAttribute('class', 'coffee');
     var child = document.createElement('div');
-    child.innerHTML = '<div>' + coffee.name + '</div>';
-    child.innerHTML += '<div>' + coffee.roast + '</div>';
-    html.appendChild(child.value);
-    return html;
+    child.innerHTML =  `<div id="${coffee.id}"> ${coffee.name} ${coffee.roast} </div>`;
+    console.log(html);
+    console.log(child);
+    html.appendChild(child);
+    return html.innerHTML;
 
 }
 
+// reworked the loop and reversed it to get ascending IDs
 function renderCoffees(coffees) {
     var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
+    // for(var i = coffees.length - 1; i >= 0; i--) {
+    //     html += renderCoffee(coffees[i]);
+    // }
+    for(let i = 0; i < coffees.length; i++){
         html += renderCoffee(coffees[i]);
     }
     return html;
