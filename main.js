@@ -22,13 +22,16 @@ function renderCoffee(coffee) {
     var html = document.createElement('li');
     // html.setAttribute('class', 'coffee');
     var child = document.createElement('div');
-    child.innerHTML =  `<div id="${coffee.id}"> ${coffee.name} ${coffee.roast} </div>`;
-    console.log(html);
-    console.log(child);
+    child.innerHTML = `${coffee.name} ${coffee.roast} `;
+    child.setAttribute('id', coffee.id);
     html.appendChild(child);
-    return html.innerHTML;
+    return html.outerHTML;
 
 }
+
+
+
+
 
 // reworked the loop and reversed it to get ascending IDs
 function renderCoffees(coffees) {
@@ -71,11 +74,30 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
+function mySearch() {
+    let input, filter, ul, li, div, txtValue;
+     input = document.getElementById('coffee-search');
+     filter = input.value.toUpperCase();
+     ul = document.getElementById('coffees');
+     li = ul.getElementsByTagName('li');
 
-var tbody = document.querySelector('#coffees');
+    for(let i = 0; i < li.length; i++) {
+         div = li[i].getElementsByTagName('div') [0];
+         txtValue = div.textContent || div.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) { // if filter is inside of (indexin) then display else don't display
+            li[i].style.display = '';
+        } else {
+            li[i].style.display = 'none';
+        }
+    }
+
+}
+
+var tbody = document.getElementById('coffees');
 var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
 
 tbody.innerHTML = renderCoffees(coffees);
 
 submitButton.addEventListener('click', updateCoffees);
+
