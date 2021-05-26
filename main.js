@@ -24,6 +24,7 @@ function renderCoffee(coffee) {
     var child = document.createElement('div');
     child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">-</a>`;
     child.setAttribute('id', coffee.id);
+    child.setAttribute('class', 'card');
     html.appendChild(child);
     return html.outerHTML;
 
@@ -75,11 +76,8 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-// var storedCoffees = localStorage.setItem('coffees', JSON.stringify(coffees)); // remove from global scope
-// JSON.parse(storedCoffees);
-console.log(JSON.parse(localStorage.getItem('coffees')));
-// coffees = JSON.parse(localStorage.getItem('coffees')); // this makes the page refresh
-
+coffees = JSON.parse(localStorage.getItem('coffees'));
+// ^ above function makes local storage
 
 
 // function submitCoffee(e){
@@ -89,7 +87,7 @@ console.log(JSON.parse(localStorage.getItem('coffees')));
 // }
 
 // function to addCoffee
-function addCoffee(e) {
+function addCoffee(e){
 
     e.preventDefault(); // make a copy of earlier functionality (wont refresh on submit);
 
@@ -165,12 +163,12 @@ submitButton.addEventListener('click', updateCoffees);
 
 function removeCoffee(index) {
 
+    var confirmRemove = confirm("Are you sure you want to remove this coffee?");
 
+    if (confirmRemove) {
+        coffees.splice(index, 1);
+        localStorage.setItem('coffees', JSON.stringify(coffees));
+        tbody.innerHTML = renderCoffees(coffees);
+    }
 
-    console.log('test');
-    coffees.splice(index, 1);
-    localStorage.setItem('coffees', JSON.stringify(coffees));
-    console.log(index);
-    tbody.innerHTML = renderCoffees(coffees);
-//     removeButton();
 }
