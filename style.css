@@ -1,9 +1,23 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+h1 {
+    font-family: 'Mate SC', serif;
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+.coffee-name {
+    font-family: 'Mate SC', serif;
+    font-size: 1.5rem;
+
+
+
+}
+
+.coffee-roast {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: .9rem;
 }
