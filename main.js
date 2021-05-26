@@ -77,9 +77,9 @@ var coffees = [
 
 // var storedCoffees = localStorage.setItem('coffees', JSON.stringify(coffees)); // remove from global scope
 // JSON.parse(storedCoffees);
-// console.log(JSON.parse(localStorage.getItem('coffees')));
-// coffees = JSON.parse(localStorage.getItem('coffees'));
-//
+console.log(JSON.parse(localStorage.getItem('coffees')));
+// coffees = JSON.parse(localStorage.getItem('coffees')); // this makes the page refresh
+
 
 
 // function submitCoffee(e){
@@ -89,7 +89,7 @@ var coffees = [
 // }
 
 // function to addCoffee
-function addCoffee(e){
+function addCoffee(e) {
 
     e.preventDefault(); // make a copy of earlier functionality (wont refresh on submit);
 
@@ -105,11 +105,21 @@ function addCoffee(e){
         roast: roast
     };
 
-    coffees.push(newObject);
+    pushToArray(coffees, newObject);
+
     localStorage.setItem('coffees', JSON.stringify(coffees));
     console.log(coffees);
     tbody.innerHTML = renderCoffees(coffees);
 }
+
+//this function is to not let more then 1 be created with same name also does not submit if empty string
+function pushToArray ( arr, obj ) {
+    var existingName = arr.map((obj) => obj.name);
+    var exisitingRoasts = arr.map((obj) => obj.roast);
+    if (!existingName.includes(obj.name) && obj.name !== '') {
+        arr.push(obj);
+    }
+};
 
 
 function mySearch() {
