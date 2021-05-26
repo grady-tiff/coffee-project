@@ -24,13 +24,11 @@ function renderCoffee(coffee) {
     var child = document.createElement('div');
     child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">-</a>`;
     child.setAttribute('id', coffee.id);
+    child.setAttribute('class', 'card');
     html.appendChild(child);
     return html.outerHTML;
 
 }
-
-
-
 
 
 // reworked the loop and reversed it to get ascending IDs
@@ -39,7 +37,7 @@ function renderCoffees(coffees) {
     // for(var i = coffees.length - 1; i >= 0; i--) {
     //     html += renderCoffee(coffees[i]);
     // }
-    for(let i = 0; i < coffees.length; i++){
+    for (let i = 0; i < coffees.length; i++) {
         html += renderCoffee(coffees[i]);
     }
     return html;
@@ -49,7 +47,7 @@ function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
     var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
+    coffees.forEach(function (coffee) {
         if (coffee.roast === selectedRoast) {
             filteredCoffees.push(coffee);
         }
@@ -75,11 +73,8 @@ var coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-// var storedCoffees = localStorage.setItem('coffees', JSON.stringify(coffees)); // remove from global scope
-// JSON.parse(storedCoffees);
-// console.log(JSON.parse(localStorage.getItem('coffees')));
-// coffees = JSON.parse(localStorage.getItem('coffees'));
-//
+coffees = JSON.parse(localStorage.getItem('coffees'));
+// ^ above function makes local storage
 
 
 // function submitCoffee(e){
@@ -89,7 +84,7 @@ var coffees = [
 // }
 
 // function to addCoffee
-function addCoffee(e){
+function addCoffee(e) {
 
     e.preventDefault(); // make a copy of earlier functionality (wont refresh on submit);
 
@@ -114,14 +109,14 @@ function addCoffee(e){
 
 function mySearch() {
     let input, filter, ul, li, div, txtValue;
-     input = document.getElementById('coffee-search');
-     filter = input.value.toUpperCase();
-     ul = document.getElementById('coffees');
-     li = ul.getElementsByTagName('li');
+    input = document.getElementById('coffee-search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById('coffees');
+    li = ul.getElementsByTagName('li');
 
-    for(let i = 0; i < li.length; i++) {
-         div = li[i].getElementsByTagName('div') [0];
-         txtValue = div.textContent || div.innerText;
+    for (let i = 0; i < li.length; i++) {
+        div = li[i].getElementsByTagName('div') [0];
+        txtValue = div.textContent || div.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) { // if filter is inside of (indexin) then display else don't display
             li[i].style.display = '';
         } else {
@@ -143,7 +138,6 @@ submitCoffee.addEventListener('click', addCoffee);
 submitButton.addEventListener('click', updateCoffees);
 
 
-
 // removeButton();
 
 // function removeButton(){
@@ -155,12 +149,12 @@ submitButton.addEventListener('click', updateCoffees);
 
 function removeCoffee(index) {
 
+    var confirmRemove = confirm("Are you sure you want to remove this coffee?");
 
+    if (confirmRemove) {
+        coffees.splice(index, 1);
+        localStorage.setItem('coffees', JSON.stringify(coffees));
+        tbody.innerHTML = renderCoffees(coffees);
+    }
 
-    console.log('test');
-    coffees.splice(index, 1);
-    localStorage.setItem('coffees', JSON.stringify(coffees));
-    console.log(index);
-    tbody.innerHTML = renderCoffees(coffees);
-//     removeButton();
 }
