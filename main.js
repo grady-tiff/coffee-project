@@ -20,11 +20,12 @@
 // added createElement instead html +=
 function renderCoffee(coffee) {
     var html = document.createElement('li');
-    // html.setAttribute('class', 'coffee');
+    html.setAttribute('class', 'col-6');
     var child = document.createElement('div');
-    child.innerHTML = `${coffee.name} ${coffee.roast} <a id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">-</a>`;
+    child.innerHTML = `<p class="coffee-name">${coffee.name}</p> <p class="coffee-roast">${coffee.roast}</p> <a id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">-</a>`;
     child.setAttribute('id', coffee.id);
     child.setAttribute('class', 'card');
+    child.setAttribute('style', 'width: auto;');
     html.appendChild(child);
     return html.outerHTML;
 
@@ -52,6 +53,10 @@ function updateCoffees(e) {
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
         if (coffee.roast === selectedRoast) {
+            filteredCoffees.push(coffee);
+        }
+        if (selectedRoast === "all") {
+            console.log("all");
             filteredCoffees.push(coffee);
         }
     });
