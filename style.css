@@ -1,3 +1,4 @@
+
 ul {
     display: flex;
     flex-flow: row wrap;
@@ -20,4 +21,37 @@ h1 {
 .coffee-roast {
     font-family: 'ZCOOL KuaiLe', cursive;
     font-size: .9rem;
+}
+label {
+    font-family: 'Mate SC', serif;
+    font-size: 1.5rem;
+}
+
+form {
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
+
+li a {
+    width: 70px;
+    font-size: .7rem !important;
+    align-self: center;
+    font-family: 'ZCOOL KuaiLe', cursive;
+
+}
+
+.container-fluid>.card {
+    padding: 20px;
+}
+
+.text-uppercase {
+    font-family: 'Mate SC', serif;
+    font-size: 1.5rem;
+}
+footer {
+    height: fit-content;
+}
+
+.footer-p {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 1rem;
 }
