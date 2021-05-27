@@ -31,6 +31,10 @@ form {
     font-family: 'ZCOOL KuaiLe', cursive;
 }
 
+.top-two {
+    background-color: #6c757d82 !important;
+}
+
 li a {
     width: 70px;
     font-size: .7rem !important;
