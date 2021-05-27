@@ -22,7 +22,7 @@ function renderCoffee(coffee) {
     var html = document.createElement('li');
     html.setAttribute('class', 'col-6');
     var child = document.createElement('div');
-    child.innerHTML = `<p class="coffee-name">${coffee.name}</p> <p class="coffee-roast">${coffee.roast}</p> <a class="btn btn-sm btn-outline-dark" id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">Remove</a>`;
+    child.innerHTML = `<p class="coffee-name">${coffee.name}</p> <p class="coffee-roast">${coffee.roast} roast</p> <a class="btn btn-sm btn-outline-dark" id="remove${coffee.id}" href="#" onclick="removeCoffee(${coffees.indexOf(coffee)})">Remove</a>`;
     child.setAttribute('id', coffee.id);
     child.setAttribute('class', 'card');
     child.setAttribute('style', 'width: auto;');
